@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+// import React from 'react';
+// import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LogIn from './pages/LogIn';
+import List from './pages/List';
 
 function App() {
+  // ページの定義をまとめる
+  const pages = [
+    {path: "/", element: <LogIn/>},
+    {path: "/List", element: <List/>}
+  ]
+
+  // TODO: 都度Route宣言しなくても良いようにする
+  const pageRoutes = pages.forEach((page) => {
+    return (
+      <Route path={page.path} element={page.element} />
+    )
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path={`/`} element={<LogIn/>} />
+        <Route path={`/List`} element={<List/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
